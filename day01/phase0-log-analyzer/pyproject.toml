@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling>=1.25,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agent-log-analyzer"
+version = "0.1.0"
+description = "Phase 0: typed, bounded, asynchronous device log analysis"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["pydantic>=2.10,<3"]
+
+[project.scripts]
+agent-logs = "log_analyzer.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "mypy>=1.13,<2"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/log_analyzer"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["src", "tests", "experiments"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
